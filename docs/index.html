@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GLAZE — Launching Soon</title>
+<meta name="description" content="GLAZE. A new perfume house, arriving soon. Join the list for early access.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#14100d;
+    --ink:#f6ece1;
+    --muted:#b9a794;
+    --amber:#e8b873;
+    --rose:#d98f7c;
+    --gold:#f3d9a4;
+    --line:rgba(246,236,225,.18);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Jost',system-ui,sans-serif;
+    font-weight:300;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* glossy drifting glow */
+  .glow{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+  .glow span{
+    position:absolute;border-radius:50%;filter:blur(90px);opacity:.55;
+    animation:drift 22s ease-in-out infinite alternate;
+  }
+  .glow span:nth-child(1){width:46vmax;height:46vmax;left:-12vmax;top:-14vmax;background:radial-gradient(circle,#c9783f,transparent 65%)}
+  .glow span:nth-child(2){width:40vmax;height:40vmax;right:-10vmax;bottom:-12vmax;background:radial-gradient(circle,#a6506a,transparent 65%);animation-delay:-8s}
+  .glow span:nth-child(3){width:28vmax;height:28vmax;left:40%;top:30%;background:radial-gradient(circle,#e8b873,transparent 65%);opacity:.22;animation-delay:-14s}
+  @keyframes drift{to{transform:translate3d(6vmax,4vmax,0) scale(1.12)}}
+
+  main{
+    position:relative;z-index:1;
+    min-height:100vh;
+    display:flex;flex-direction:column;align-items:center;justify-content:space-between;
+    padding:32px 24px;
+    text-align:center;
+  }
+  header,footer{width:100%;max-width:1100px;display:flex;justify-content:space-between;align-items:center;
+    font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--muted)}
+
+  .hero{display:flex;flex-direction:column;align-items:center;gap:28px;padding:48px 0}
+
+  /* the bottle: a simple glazed glass form */
+  .bottle{position:relative;width:104px;height:150px;margin-bottom:6px}
+  .bottle .cap{
+    position:absolute;left:50%;top:0;transform:translateX(-50%);
+    width:34px;height:30px;border-radius:6px 6px 3px 3px;
+    background:linear-gradient(135deg,#f3d9a4,#b98440 60%,#e8b873);
+    box-shadow:0 2px 10px rgba(232,184,115,.35);
+  }
+  .bottle .body{
+    position:absolute;left:0;right:0;bottom:0;height:122px;border-radius:22px 22px 26px 26px;
+    background:
+      linear-gradient(160deg,rgba(255,255,255,.55) 0%,rgba(255,255,255,.08) 28%,rgba(255,255,255,0) 50%),
+      linear-gradient(180deg,rgba(232,184,115,.55),rgba(217,143,124,.75));
+    border:1px solid rgba(246,236,225,.35);
+    box-shadow:inset 0 0 22px rgba(255,255,255,.18),0 18px 50px rgba(217,143,124,.28);
+    backdrop-filter:blur(2px);
+    overflow:hidden;
+  }
+  .bottle .body::after{ /* glossy sweep */
+    content:"";position:absolute;top:-20%;left:-60%;width:40%;height:140%;
+    background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);
+    transform:skewX(-18deg);
+    animation:sweep 5.5s ease-in-out infinite;
+  }
+  @keyframes sweep{0%,55%{left:-60%}100%{left:140%}}
+  .bottle .label{
+    position:absolute;left:50%;top:56%;transform:translate(-50%,-50%);
+    font-family:'Cormorant Garamond',serif;font-size:13px;letter-spacing:.34em;color:#2a1a10;padding-left:.34em;
+  }
+
+  .eyebrow{font-size:11px;letter-spacing:.42em;text-transform:uppercase;color:var(--amber)}
+  h1{
+    font-family:'Cormorant Garamond',serif;font-weight:300;
+    font-size:clamp(64px,16vw,176px);letter-spacing:.14em;padding-left:.14em;line-height:.95;
+    background:linear-gradient(100deg,#f6ece1 0%,#f3d9a4 35%,#e8b873 50%,#f6ece1 70%);
+    background-size:220% 100%;
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    animation:shine 7s ease-in-out infinite alternate;
+  }
+  @keyframes shine{to{background-position:100% 0}}
+  .tag{
+    font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;
+    font-size:clamp(20px,3.4vw,30px);color:var(--ink);opacity:.88;max-width:30ch;line-height:1.3;
+  }
+
+  form{
+    display:flex;width:min(480px,100%);
+    border:1px solid var(--line);border-radius:999px;padding:5px;
+    background:rgba(255,255,255,.04);backdrop-filter:blur(10px);
+    transition:border-color .25s;
+  }
+  form:focus-within{border-color:var(--amber)}
+  input{
+    flex:1;min-width:0;background:none;border:0;outline:0;color:var(--ink);
+    font:400 14px 'Jost',sans-serif;padding:0 20px;letter-spacing:.03em;
+  }
+  input::placeholder{color:var(--muted)}
+  button{
+    border:0;cursor:pointer;border-radius:999px;padding:14px 26px;
+    font:500 11px 'Jost',sans-serif;letter-spacing:.26em;text-transform:uppercase;color:#2a1a10;
+    background:linear-gradient(135deg,#f3d9a4,#e8b873 55%,#d98f7c);
+    transition:transform .2s,box-shadow .2s;
+  }
+  button:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(232,184,115,.35)}
+  button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+  .note{font-size:12px;color:var(--muted);letter-spacing:.04em;min-height:18px}
+
+  footer a{color:inherit;text-decoration:none;border-bottom:1px solid transparent;transition:color .2s,border-color .2s}
+  footer a:hover{color:var(--ink);border-color:var(--ink)}
+  footer .links{display:flex;gap:28px}
+
+  @media (max-width:560px){
+    header span:last-child{display:none}
+    header{justify-content:center}
+    footer{flex-direction:column;gap:14px}
+    button{padding:14px 18px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+  }
+</style>
+</head>
+<body>
+<div class="glow" aria-hidden="true"><span></span><span></span><span></span></div>
+
+<main>
+  <header>
+    <span>Parfum</span>
+    <span>Est. 2026</span>
+  </header>
+
+  <section class="hero">
+    <div class="bottle" aria-hidden="true">
+      <div class="cap"></div>
+      <div class="body"><div class="label">GLAZE</div></div>
+    </div>
+
+    <p class="eyebrow">Launching soon</p>
+    <h1>GLAZE</h1>
+    <p class="tag">Scent with a finish like light on glass.</p>
+
+    <form id="signup" novalidate>
+      <input type="email" id="email" name="email" placeholder="Your email address" autocomplete="email" aria-label="Email address" required>
+      <button type="submit">Notify me</button>
+    </form>
+    <p class="note" id="note" role="status" aria-live="polite">Be first to know. Early access for the list.</p>
+  </section>
+
+  <footer>
+    <span>&copy; 2026 GLAZE</span>
+    <span class="links">
+      <a href="#" aria-label="Instagram">Instagram</a>
+      <a href="#" aria-label="TikTok">TikTok</a>
+      <a href="mailto:hello@glaze.example">Contact</a>
+    </span>
+  </footer>
+</main>
+
+<script>
+  // Signup: front-end only. Connect to your email provider (Mailchimp, Klaviyo, etc.) here.
+  const form = document.getElementById('signup');
+  const note = document.getElementById('note');
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const v = document.getElementById('email').value.trim();
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)){
+      note.textContent = 'Please enter a valid email address.';
+      return;
+    }
+    note.textContent = 'Thank you. You are on the list.';
+    form.reset();
+  });
+</script>
+</body>
+</html>
