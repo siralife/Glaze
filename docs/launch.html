@@ -2652,14 +2652,22 @@ document.addEventListener("keydown", function(event) {
 </script>
 
 	<script>
-history.pushState({ lightbox: true }, "");
+let reviewScrollPosition = 0;
 
-window.addEventListener("popstate", function () {
+const originalOpenReviewImage = openReviewImage;
+
+openReviewImage = function(imageSrc) {
+    reviewScrollPosition = window.scrollY;
+    history.pushState({ reviewLightbox: true }, "");
+    originalOpenReviewImage(imageSrc);
+};
+
+window.addEventListener("popstate", function() {
     var lightbox = document.getElementById("reviewLightbox");
 
     if (lightbox && lightbox.style.display === "flex") {
         closeReviewImage();
-        history.pushState({ lightbox: true }, "");
+        window.scrollTo(0, reviewScrollPosition);
     }
 });
 </script>
