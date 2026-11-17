@@ -2651,6 +2651,19 @@ document.addEventListener("keydown", function(event) {
 
 </script>
 
+	<script>
+history.pushState({ lightbox: true }, "");
+
+window.addEventListener("popstate", function () {
+    var lightbox = document.getElementById("reviewLightbox");
+
+    if (lightbox && lightbox.style.display === "flex") {
+        closeReviewImage();
+        history.pushState({ lightbox: true }, "");
+    }
+});
+</script>
+
 <!-- Features Marquee -->
 <div class="features-marquee">
     <div class="features-track">
